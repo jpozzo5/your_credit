@@ -1,0 +1,62 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+      <h2>Clientes</h2>
+
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="col-sm-12">
+        <form class="form-signin" action="register-customer/" method="GET">
+          <div class="col-sm-8">Crear Nuevo  Cliente</div>
+          <div class="col-sm-4" align="right">
+            <button class="btn btn-primary btn-sm"  type="submit"> Crear</button>
+          </div>
+		    </form>
+        </div>
+        
+        <table id="customers" class="table table-striped table-bordered" style="margin-top:20px;">
+          <thead>
+              <td>Nombre</td>
+              <td>Correo</td>
+              <td>Nacionalidad</td>
+              <td>Telefono</td>
+              <td>Banco</td>
+              <td>Acción</td>
+          </thead>
+          <tbody>
+            {% for customer in customer_list %}
+            <tr id ="tr{{customer.id}}">
+              <td><a class="">{{customer.name}}</a></td>
+              <td><a class="">{{customer.email}}</a></td>
+              <td><a class="">{{customer.nation}}</a></td>
+              <td><a class="">{{customer.phone_number}}</a></td>
+              <td><a class="">{{customer.bank.name}}</a></td>
+              <td class="text-center">
+
+                   <a class="btn btn-success btn-sm" href="home/update/{{customer.id}}">Actualizar</a>
+                  <br></br>
+                  <button id ="btn-delete_customer" customer_id ="{{customer.id}}" class="btn-delete_customer btn btn-danger btn-sm" >Eliminar</button></a>
+                  
+              </td>
+            </tr>
+
+            {% endfor %}
+          </tbody>
+          <tfoot>
+              <td>Nombre</td>
+              <td>Correo</td>
+              <td>Nacionalidad</td>
+              <td>Telefono</td>
+              <td>Banco</td>
+              <td>Acción</td>
+
+          </tfoot>
+          </table>
+       
+      </div>
+    </div>
+    {% block modalcustomer %}
+        {% include "modal_update_customer.html" %}
+    {% endblock %}
+{% endblock content %}
